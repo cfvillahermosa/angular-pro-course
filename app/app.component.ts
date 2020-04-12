@@ -6,19 +6,16 @@ import { User } from './auth-form/auth-form.interface';
   selector: 'app-root',
   template: `
     <div>
-      <auth-form 
-        (submitted)="createUser($event)">
+      <auth-form (submitted)="createUser($event)">
         <h3>Create account</h3>
       </auth-form>
-      <auth-form 
-        (submitted)="loginUser($event)">
+      <auth-form (submitted)="loginUser($event)">
         <h3>Login</h3>
       </auth-form>
     </div>
   `
 })
 export class AppComponent {
-
   createUser(user: User) {
     console.log('Create account', user);
   }
@@ -26,5 +23,4 @@ export class AppComponent {
   loginUser(user: User) {
     console.log('Login', user);
   }
-
 }

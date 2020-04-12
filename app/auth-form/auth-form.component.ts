@@ -10,11 +10,11 @@ import { User } from './auth-form.interface';
         <ng-content></ng-content>
         <label>
           Email address
-          <input type="email" name="email" ngModel>
+          <input type="email" name="email" ngModel />
         </label>
         <label>
           Password
-          <input type="password" name="password" ngModel>
+          <input type="password" name="password" ngModel />
         </label>
         <button type="submit">
           Submit
@@ -24,11 +24,9 @@ import { User } from './auth-form.interface';
   `
 })
 export class AuthFormComponent {
-
   @Output() submitted: EventEmitter<User> = new EventEmitter<User>();
 
   onSubmit(value: User) {
     this.submitted.emit(value);
   }
-
 }
