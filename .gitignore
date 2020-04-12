@@ -25,3 +25,6 @@ npm-debug.log
 
 # Cache
 .awcache
+
+#angulardoc.json
+.angulardoc.json
