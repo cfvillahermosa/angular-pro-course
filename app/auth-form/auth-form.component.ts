@@ -11,6 +11,7 @@ import {
   Renderer,
   ViewChild,
   ViewChildren,
+  Input,
 } from "@angular/core";
 import { User } from "./auth-form.interface";
 import { AuthMessageComponent } from "./auth-message.component";
@@ -43,7 +44,7 @@ import { AuthRememberComponent } from "./auth-remember.component";
   `,
 })
 export class AuthFormComponent {
-  public title = "Login";
+  title = "Login";
 
   @Output() submitted: EventEmitter<User> = new EventEmitter<User>();
 
