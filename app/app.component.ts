@@ -13,6 +13,15 @@ import { Component } from "@angular/core";
           credit-card
         />
       </label>
+      <label
+      tooltip="3 digits, back of your card"
+      #myTooltip="tooltip"><!-- to get the value and to get access to our tooltip because we use the exportAs "tooltip", we can then access this because we have bound it to the same element -->
+        Enter your security code
+        <span (mouseover)="myTooltip.show()" (mouseout)="myTooltip.hide()">
+          (?)
+        </span>
+        <input type="text"/>
+      </label>
     </div>
   `,
 })
