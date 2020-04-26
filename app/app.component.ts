@@ -11,15 +11,13 @@ import { User } from "./auth-form/auth-form.interface";
 
 @Component({
   selector: "app-root",
-  styles: [`
-    button {
-      max-height: 35px;
-    }
-  `],
   template: `
     <div>
       <button (click)="destroyComponent()">
         Destroy
+      </button>
+      <button (click)="moveComponent()">
+        Move
       </button>
       <!-- Container div for adding components with create component method of ComponentFactoryResolver -->
       <div #entry></div>
@@ -44,14 +42,20 @@ export class AppComponent implements AfterContentInit {
     const authFormFactory = this.resolver.resolveComponentFactory(
       AuthFormComponent
     );
-    // 4 - we add into our container our component factory
-    this.component = this.entry.createComponent(authFormFactory);
+    this.entry.createComponent(authFormFactory);
+    // 4 - we add into our container our component factory at index 0
+    this.component = this.entry.createComponent(authFormFactory, 0);
     this.component.instance.title = "Create account";
     this.component.instance.submitted.subscribe(this.loginUser);
   }
 
   destroyComponent() {
     this.component.destroy();
+  }
+
+  moveComponent() {
+    // we move the component into hostview at index position 1
+    this.entry.move(this.component.hostView, 1);
   }
 
   loginUser(user: User) {
