@@ -1,10 +1,10 @@
-import { Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef } from "@angular/core";
 
 @Directive({
-  selector: '[credit-card]'
+  selector: "[credit-card]",
 })
 export class CreditCardDirective {
   constructor(private element: ElementRef) {
-    console.log(this.element);
+    console.log("***", this.element);
   }
 }
