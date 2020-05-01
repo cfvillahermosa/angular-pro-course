@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 interface File {
-  name: string,
-  size: number,
-  type: string
+  name: string;
+  size: number;
+  type: string;
 }
 
 @Component({
@@ -12,7 +12,7 @@ interface File {
     <div>
       <div *ngFor="let file of files">
         <p>{{ file.name }}</p>
-        <p>{{ file.size | filesize }}</p>
+        <p>{{ file.size | filesize : 'megabytes' }}</p>
       </div>
     </div>
   `
