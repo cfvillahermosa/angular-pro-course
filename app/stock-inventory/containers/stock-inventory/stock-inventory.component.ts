@@ -6,10 +6,14 @@ import { FormControl, FormGroup, FormArray } from '@angular/forms';
   template: `
     <div class="stock-inventory">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div formGroupName="store">
-          <input type="text" placeholder="Branch ID" formControlName="branch" />
-          <input type="text" placeholder="Manager Code" formControlName="code" />
-        </div>
+
+
+        <stock-branch [parent]="form"></stock-branch>
+
+        <stock-selector [parent]="form"></stock-selector>
+
+        <stock-products [parent]="form"></stock-products>
+
         <div class="stock-inventory__buttons">
           <button type="submit" [disabled]="form.invalid">Order stock</button>
         </div>
@@ -21,12 +25,17 @@ import { FormControl, FormGroup, FormArray } from '@angular/forms';
 export class StockInventoryComponent {
   form = new FormGroup({
     store: new FormGroup({
-      branch: new FormControl('B182'),
-      code: new FormControl('1234')
-    })
+      branch: new FormControl(''),
+      code: new FormControl('')
+    }),
+    selector: new FormGroup({
+      product_id: new FormControl(''),
+      quantity: new FormControl(10)
+    }),
+    stock: new FormArray([]) // FormArray allow us to create a collection of particular form controls or particular form groups
   });
 
   onSubmit() {
-    console.log('Submit: ', this.form.value);
+    console.log('*** Submit: ', this.form.value);
   }
 }
