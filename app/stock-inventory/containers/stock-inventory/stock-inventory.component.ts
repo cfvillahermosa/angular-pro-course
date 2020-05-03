@@ -50,17 +50,26 @@ export class StockInventoryComponent {
     }
   ];
 
-  form = new FormGroup({ // Main form
-    store: new FormGroup({ // Store form group
+  form = new FormGroup({
+    // Main form
+    store: new FormGroup({
+      // Store form group
       branch: new FormControl(''),
       code: new FormControl('')
     }),
-    selector: new FormGroup({ // Selector form group
-      product_id: new FormControl(''),
-      quantity: new FormControl(10)
-    }),
-    stock: new FormArray([]) // FormArray allow us to create a collection of particular form controls or particular form groups
+    selector: this.createStock({}),
+    stock: new FormArray([
+      this.createStock({ product_id: 1, quantity: 10 }),
+      this.createStock({ product_id: 3, quantity: 50 })
+    ]) // FormArray allow us to create a collection of particular form controls or particular form groups
   });
+
+  createStock(stock) {
+    return new FormGroup({
+      product_id: new FormControl(parseInt(stock.product_id, 10) || ''),
+      quantity: new FormControl(stock.quantity || 10)
+    });
+  }
 
   onSubmit() {
     console.log('*** Submit: ', this.form.value);
