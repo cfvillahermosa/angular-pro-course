@@ -11,21 +11,12 @@ import { Product } from '../../models/product.interface';
       <div formGroupName="selector">
         <select formControlName="product_id">
           <option value="">Select stock</option>
-          <option
-            *ngFor="let product of products"
-            [value]="product.id">
+          <option *ngFor="let product of products" [value]="product.id">
             {{ product.name }}
           </option>
         </select>
-        <input 
-          type="number"
-          step="10"
-          min="10"
-          max="1000"
-          formControlName="quantity">
-        <button 
-          type="button"
-          (click)="onAdd()">
+        <input type="number" step="10" min="10" max="1000" formControlName="quantity" />
+        <button type="button" (click)="onAdd()">
           Add stock
         </button>
       </div>
@@ -35,7 +26,7 @@ import { Product } from '../../models/product.interface';
 export class StockSelectorComponent {
   @Input()
   parent: FormGroup;
-  
+
   @Input()
   products: Product[];
 
@@ -44,5 +35,8 @@ export class StockSelectorComponent {
 
   onAdd() {
     this.added.emit(this.parent.get('selector').value);
+    this.parent.get('selector').reset({ product_id: '', quantity: 10 });
+    // this.parent.get('selector').setValue({ product_id: '', quantity: 10 });
+    // this.parent.get('selector').patchValue({ product_id: '' });
   }
 }
