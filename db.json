@@ -1,6 +1,7 @@
 {
   "cart": [
     { "product_id": 1, "quantity": 10 },
+    { "product_id": 2, "quantity": 20 },
     { "product_id": 3, "quantity": 50 }
   ],
   "products": [
