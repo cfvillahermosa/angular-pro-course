@@ -15,8 +15,8 @@ import { Product } from '../../models/product.interface';
             {{ product.name }}
           </option>
         </select>
-        <stock-counter [step]="10" [min]="10" [max]="1000" formControlName="quantity"></stock-counter>
-        <button type="button" (click)="onAdd()" [disabled]="stockExists || notSelected">
+        <stock-counter [step]="10" [min]="10" [max]="1000" formControlName="quantity"> </stock-counter>
+        <button type="button" [disabled]="stockExists || notSelected" (click)="onAdd()">
           Add stock
         </button>
         <div class="stock-selector__error" *ngIf="stockExists">
@@ -46,8 +46,9 @@ export class StockSelectorComponent {
 
   onAdd() {
     this.added.emit(this.parent.get('selector').value);
-    this.parent.get('selector').reset({ product_id: '', quantity: 10 });
-    // this.parent.get('selector').setValue({ product_id: '', quantity: 10 });
-    // this.parent.get('selector').patchValue({ product_id: '' });
+    this.parent.get('selector').reset({
+      product_id: '',
+      quantity: 10
+    });
   }
 }
