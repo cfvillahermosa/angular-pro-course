@@ -47,7 +47,7 @@ export class StockInventoryComponent implements OnInit {
     }),
     selector: this.createStock({}),
     stock: this.fb.array([])
-  });
+  }, {validator: StockValidators.checkStockExists});
 
   constructor(private fb: FormBuilder, private stockService: StockInventoryService) {}
 
