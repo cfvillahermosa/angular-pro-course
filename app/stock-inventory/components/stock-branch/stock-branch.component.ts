@@ -8,11 +8,11 @@ import { FormGroup } from '@angular/forms';
     <div [formGroup]="parent">
       <div formGroupName="store">
         <input type="text" placeholder="Branch ID" formControlName="branch" />
-        <div
-          class="error"
-          *ngIf="required('branch')"
-        >
+        <div class="error" *ngIf="required('branch')">
           Branch ID is required
+        </div>
+        <div class="error" *ngIf="invalid">
+          Invalid branch code: 1 letter, 3 numbers
         </div>
         <input type="text" placeholder="Manager Code" formControlName="code" />
         <div class="error" *ngIf="required('code')">
@@ -25,10 +25,16 @@ import { FormGroup } from '@angular/forms';
 export class StockBranchComponent {
   @Input()
   parent: FormGroup;
-  required(name: string): boolean{
+
+  get invalid() {
     return (
-      this.parent.get(`store.${name}`).hasError('required') &&
-      this.parent.get(`store.${name}`).touched
-      );
+      this.parent.get('store.branch').hasError('invalidBranch') &&
+      this.parent.get('store.branch').dirty &&
+      !this.required('branch')
+    );
+  }
+
+  required(name: string): boolean {
+    return this.parent.get(`store.${name}`).hasError('required') && this.parent.get(`store.${name}`).touched;
   }
 }
