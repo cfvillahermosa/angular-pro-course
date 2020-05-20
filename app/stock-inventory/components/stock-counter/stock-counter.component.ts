@@ -13,9 +13,9 @@ const COUNTER_CONTROL_ACCESSOR = {
   providers: [COUNTER_CONTROL_ACCESSOR],
   styleUrls: ['./stock-counter.component.scss'],
   template: `
-    <div class="stock-counter">
+    <div class="stock-counter" [class.focused]="focus">
       <div>
-        <div>
+        <div tabindex="0" (keydown)="onKeyDown($event)" (blur)="onBlur($event)" (focus)="onFocus($event)">
           <p>{{ value }}</p>
           <div>
             <button type="button" (click)="increment()" [disabled]="value === max">+</button>
@@ -57,6 +57,33 @@ export class StockCounterComponent implements ControlValueAccessor {
   @Input() max: number = 1000;
 
   value: number = 10;
+  focus: boolean;
+  onKeyDown(event: KeyboardEvent) {
+    const handlers = {
+      ArrowDown: () => this.decrement(),
+      ArrowUp: () => this.increment()
+    };
+    if (handlers[event.code]) {
+      handlers[event.code]();
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    this.onTouch();
+  }
+
+  onBlur(event: FocusEvent) {
+    this.focus = false;
+    event.preventDefault();
+    event.stopPropagation();
+    this.onTouch();
+  }
+
+  onFocus(event: FocusEvent) {
+    this.focus = true;
+    event.preventDefault();
+    event.stopPropagation();
+    this.onTouch();
+  }
 
   increment() {
     if (this.value < this.max) {
