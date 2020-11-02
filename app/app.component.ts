@@ -1,24 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { NavigationEnd, Router } from '@angular/router';
+import 'rxjs/add/operator/filter';
 @Component({
   selector: 'app-root',
   styleUrls: ['app.component.scss'],
   template: `
     <div class="app">
       <header>
-        <img src="/img/logo.svg">
+        <img src="/img/logo.svg" />
       </header>
       <div class="app__content">
         <nav>
-          <a
-            routerLink="folder/inbox"
-            routerLinkActive="active">
+          <a routerLink="folder/inbox" routerLinkActive="active">
             Inbox
           </a>
-          <a
-            routerLink="folder/trash"
-            routerLinkActive="active">
+          <a routerLink="folder/trash" routerLinkActive="active">
             Trash
           </a>
         </nav>
@@ -29,5 +25,11 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   constructor(private router: Router) {}
-  ngOnInit() {}
+  ngOnInit() {
+    this.router.events
+      .filter(event => event instanceof NavigationEnd)
+      .subscribe(event => {
+        console.log('*** event', event);
+      });
+  }
 }
