@@ -12,7 +12,7 @@ import { Mail } from '../../models/mail.interface';
   `
 })
 export class MailFolderComponent {
-  messages: Observable<Mail[]> = this.router.data.pluck('messages');
-  title: Observable<string> = this.router.params.pluck('name');
-  constructor(private router: ActivatedRoute) {}
+  messages: Observable<Mail[]> = this.route.data.pluck('messages');
+  title: Observable<string> = this.route.params.pluck('name');
+  constructor(private route: ActivatedRoute) {}
 }
