@@ -5,6 +5,7 @@ import { MailAppComponent } from './components/mail-app/mail-app.component';
 import { MailItemComponent } from './components/mail-item/mail-item.component';
 import { MailViewComponent } from './components/mail-view/mail-view.component';
 import { MailViewResolver } from './components/mail-view/mail-view.resolve';
+import { MailViewGuard } from './components/mail-view/mail-view.guard';
 import { MailFolderComponent } from './containers/mail-folder/mail-folder.component';
 import { MailFolderResolver } from './containers/mail-folder/mail-folder.resolve';
 import { MailService } from './mail.service';
@@ -27,6 +28,7 @@ export const ROUTES: Routes = [
         path: 'message/:id',
         component: MailViewComponent,
         outlet: 'pane',
+        canDeactivate: [MailViewGuard],
         resolve: {
           message: MailViewResolver
         }
@@ -38,7 +40,7 @@ export const ROUTES: Routes = [
 @NgModule({
   imports: [CommonModule, AuthModule, RouterModule.forChild(ROUTES)],
   declarations: [MailFolderComponent, MailAppComponent, MailItemComponent, MailViewComponent],
-  providers: [MailService, MailFolderResolver, MailViewResolver],
+  providers: [MailService, MailFolderResolver, MailViewResolver, MailViewGuard],
   exports: [MailAppComponent]
 })
 export class MailModule {}

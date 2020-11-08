@@ -13,6 +13,6 @@ export class AuthGuard implements CanLoad, CanActivate, CanActivateChild{
     return this.authService.isLoggedIn();
   }
   canActivateChild(){
-    return false;
+    return true;
   }
 }
