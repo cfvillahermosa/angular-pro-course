@@ -22,7 +22,6 @@ describe('StockCounterComponent', () => {
     component = fixture.componentInstance;
     // give an initial value (in this step we could overwrite minimum and maximum values)
     component.value = 0;
-    component.max = 60;
   });
 
   it('should increment correctly', () => {
@@ -51,6 +50,23 @@ describe('StockCounterComponent', () => {
     for (let i = 0; i < 200; i++) {
       component.increment();
     }
-    expect(component.value).toBe(60);
+    expect(component.value).toBe(100);
+  });
+
+  it('should not increment over the maximum value', () => {
+    component.step = 20;
+    component.max = 20;
+    component.increment();
+    component.increment();
+    expect(component.value).toBe(20);
+  });
+
+  it('should call the output on a value change', () => {
+    // we´re checking the emit function gets called
+    spyOn(component.changed, 'emit').and.callThrough();
+    component.step = 100;
+    component.increment();
+    // make sure emit has benn called with a value of 100 because our step must increments 100 
+    expect(component.changed.emit).toHaveBeenCalledWith(100);
   });
 });
