@@ -29,6 +29,8 @@
     "test": "karma start"
   },
   "devDependencies": {
+    "bluebird": "3.4.1",
+    "@types/bluebird": "3.0.32",
     "@angular/compiler-cli": "4.0.0",
     "@types/core-js": "0.9.39",
     "@types/jasmine": "2.5.46",
