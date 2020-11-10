@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { FoodService } from '../food.service';
 
@@ -8,19 +7,13 @@ interface Drink {
   price: number;
 }
 
-export function DrinkFactory(http) {
-  return new FoodService(http, '/api/drinks');
+export abstract class DrinkService {
+  getDrinks: () => Observable<Drink[]>;
 }
 
 @Component({
   selector: 'drink-viewer',
-  providers: [
-    {
-      provide: FoodService,
-      useFactory: DrinkFactory,
-      deps: [Http]
-    }
-  ],
+  providers: [FoodService, { provide: DrinkService, useExisting: FoodService }],
   template: `
     <div>
       <div *ngFor="let item of items$ | async">{{ item.name }} {{ item.price | currency: 'USD':true }}</div>
@@ -29,8 +22,8 @@ export function DrinkFactory(http) {
 })
 export class DrinkViewerComponent implements OnInit {
   items$: Observable<Drink[]>;
-  constructor(private foodService: FoodService) {}
+  constructor(private foodService: DrinkService) {}
   ngOnInit() {
-    this.items$ = this.foodService.getFood();
+    this.items$ = this.foodService.getDrinks();
   }
 }
