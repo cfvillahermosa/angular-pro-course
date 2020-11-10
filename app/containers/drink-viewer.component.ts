@@ -1,24 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { FoodService } from '../food.service';
 
-
-
 interface Drink {
-  name: string,
-  price: number
+  name: string;
+  price: number;
+}
+
+export function DrinkFactory(http) {
+  return new FoodService(http, '/api/drinks');
 }
 
 @Component({
   selector: 'drink-viewer',
   providers: [
-    {provide: FoodService, useClass: FoodService}
+    {
+      provide: FoodService,
+      useFactory: DrinkFactory,
+      deps: [Http]
+    }
   ],
   template: `
     <div>
-      <div *ngFor="let item of items$ | async">
-        {{ item.name }} {{ item.price | currency:'USD':true }}
-      </div>
+      <div *ngFor="let item of items$ | async">{{ item.name }} {{ item.price | currency: 'USD':true }}</div>
     </div>
   `
 })

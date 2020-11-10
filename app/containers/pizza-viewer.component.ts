@@ -6,20 +6,26 @@ import { Observable } from 'rxjs/Observable';
 import { FoodService } from '../food.service';
 
 interface Pizza {
-  name: string,
-  price: number
+  name: string;
+  price: number;
+}
+
+export function PizzaFactory(http) {
+  return new FoodService(http, '/api/pizzas');
 }
 
 @Component({
   selector: 'pizza-viewer',
   providers: [
-    FoodService
+    {
+      provide: FoodService,
+      useFactory: PizzaFactory,
+      deps: [Http]
+    }
   ],
   template: `
     <div>
-      <div *ngFor="let item of items$ | async">
-        {{ item.name }} {{ item.price | currency:'USD':true }}
-      </div>
+      <div *ngFor="let item of items$ | async">{{ item.name }} {{ item.price | currency: 'USD':true }}</div>
     </div>
   `
 })

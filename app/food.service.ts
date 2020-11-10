@@ -1,13 +1,12 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-import { API_TOKEN } from './token';
 
 @Injectable()
 export class FoodService {
-  constructor(private http: Http, @Inject(API_TOKEN) private api: string) {
-    console.log('Ultimate Angular');
+  constructor(private http: Http, private api: string) {
+    console.log(this.api);
   }
 
   getFood(): Observable<any[]> {
