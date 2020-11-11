@@ -10,10 +10,7 @@ import { HttpModule } from '@angular/http';
   imports: [
     BrowserModule,
     HttpModule,
-    FoodStoreModule.forRoot({
-      storeId: 10292,
-      storeToken: 'eca938c99a0e9ff91029dc'
-    })
+    FoodStoreModule
   ],
   bootstrap: [AppComponent]
 })
