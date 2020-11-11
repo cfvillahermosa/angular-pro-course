@@ -6,12 +6,19 @@ import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     HttpModule,
-    FoodStoreModule
+    FoodStoreModule.forRoot({
+      storeId: 10292,
+      storeToken: 'eca938c99a0e9ff91029dc'
+    })
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule {}
