@@ -12,7 +12,7 @@ import { Store } from '../../../store';
   selector: 'songs-favourites',
   template: `
     <div class="songs">
-    <songs-list [list]="favourites$ | async">
+      <songs-list [list]="favourites$ | async" (toggle)="onToggle($event)">
         Favourites
       </songs-list>
     </div>
@@ -28,5 +28,8 @@ export class SongsFavouritesComponent implements OnInit {
       .select('playlist')
       .filter(Boolean)
       .map(playlist => playlist.filter(track => track.favourite));
+  }
+  onToggle(event) {
+    this.songsService.toggle(event);
   }
 }

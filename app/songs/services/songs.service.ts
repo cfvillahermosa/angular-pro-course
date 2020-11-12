@@ -13,10 +13,14 @@ export interface Song {
 }
 @Injectable()
 export class SongsService {
-  constructor(private http: Http, private store: Store) {}
-
   getPlaylist$: Observable<Song[]> = this.http
     .get('/api/playlist')
     .map(res => res.json())
     .do(next => this.store.set('playlist', next));
+
+  constructor(private http: Http, private store: Store) {}
+
+  toggle(event: any){
+    console.log(event);
+  }
 }
