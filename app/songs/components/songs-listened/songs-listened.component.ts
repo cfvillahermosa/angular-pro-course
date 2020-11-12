@@ -18,6 +18,9 @@ export class SongsListenedComponent implements OnInit {
   listened$: Observable<any[]>;
   constructor(private store: Store, private songsService: SongsService) {}
   ngOnInit() {
-    this.listened$ = this.store.select('playlist');
+    this.listened$ = this.store
+      .select('playlist')
+      .filter(Boolean)
+      .map(playlist => playlist.filter(track => track.listened));
   }
 }
