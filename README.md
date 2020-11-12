@@ -1,17 +1,9 @@
-<a href="https://ultimateangular.com" target="_blank"><img src="https://toddmotto.com/img/ua.png"></a>
 
-# Angular Fundamentals Seed
+# Angular Pro Course Seed
 
-> This is the seed project for the [Angular Fundamentals](https://ultimateangular.com/courses/#angular-2) course by [Todd Motto](https://twitter.com/toddmotto).
 
 ## Project Setup and Tooling
 
-### Tools
-
-This course is recorded with the following tools, you can optionally follow along using the same, or your favourite text editor/IDE and browser.
-
-*Text editor*: Visual Studio Code, you can [download it here](http://code.visualstudio.com) for both Mac, Windows and Linux.
-*Browser*: Google Chrome, you can [download it here](https://www.google.com/chrome)
 
 ### Prerequisites
 
