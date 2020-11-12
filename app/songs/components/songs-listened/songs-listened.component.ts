@@ -7,10 +7,9 @@ import { SongsService } from './../../services/songs.service';
   selector: 'songs-listened',
   template: `
     <div class="songs">
-      <div *ngFor="let item of listened$ | async">
-        {{ item.artist }}
-        {{ item.track }}
-      </div>
+      <songs-list [list]="listened$ | async">
+        Listened
+      </songs-list>
     </div>
   `
 })

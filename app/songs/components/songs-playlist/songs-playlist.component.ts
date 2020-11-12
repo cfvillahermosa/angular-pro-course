@@ -1,20 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-
-import { SongsService } from '../../services/songs.service';
-
 import { Store } from '../../../store';
+import { SongsService } from '../../services/songs.service';
 
 @Component({
   selector: 'songs-playlist',
   template: `
     <div class="songs">
-      <div *ngFor="let item of playlist$ | async">
-        {{ item.artist }}
-        {{ item.track }}
-      </div>
+      <songs-list [list]="playlist$ | async">
+        Playlist
+      </songs-list>
     </div>
   `
 })
