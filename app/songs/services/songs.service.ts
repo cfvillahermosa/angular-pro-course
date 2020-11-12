@@ -1,16 +1,17 @@
-import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
 import { Store } from '../../store';
 
 export interface Song {
   id: number;
   name: string;
   listened: boolean;
-  favourte: boolean;
+  favourite: boolean;
 }
+
 @Injectable()
 export class SongsService {
   getPlaylist$: Observable<Song[]> = this.http
@@ -20,7 +21,20 @@ export class SongsService {
 
   constructor(private http: Http, private store: Store) {}
 
-  toggle(event: any){
-    console.log(event);
+  toggle(event: any) {
+    this.http
+      .put(`/api/playlist/${event.track.id}`, event.track)
+      .map(res => res.json())
+      .subscribe((track: Song) => {
+        const value = this.store.value.playlist;
+        const playlist = value.map((song: Song) => {
+          if (event.track.id === song.id) {
+            return { ...song, ...event.track };
+          } else {
+            return song;
+          }
+        });
+        this.store.set('playlist', playlist);
+      });
   }
 }
